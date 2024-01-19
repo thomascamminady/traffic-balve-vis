@@ -65,7 +65,7 @@ function createChart(data, fromValue) {
         .tickFormat(d3.timeFormat("%H:00"));
 
     svg.append("g").attr("transform", `translate(0, ${height})`).call(xAxis).selectAll("path, line")
-        .style("stroke", "slategrey");
+        .style("stroke", d3.rgb(95, 109, 123));
 
     // Add Y axis with custom tick format
     // Define the maximum duration in seconds
@@ -101,7 +101,7 @@ function createChart(data, fromValue) {
             })
 
     ).selectAll("path, line")
-        .style("stroke", "slategrey");
+        .style("stroke", d3.rgb(95, 109, 123));
 
     svg
         .append("g")
@@ -198,18 +198,18 @@ function createChart(data, fromValue) {
         .attr("dy", "1em")
         .style("text-anchor", "middle")
         .style("font-size", "12px")
-        .style("fill", "slategrey")
+        .style("fill", d3.rgb(95, 109, 123))
         .text("Reisezeit (min:sek)");
 
     svg
         .append("text")
         .attr("transform", `translate(${width - 12}, ${height + margin.bottom})`)
         .style("text-anchor", "middle")
-        .style("fill", "slategrey")
+        .style("fill", d3.rgb(95, 109, 123))
         .style("font-size", "12px")
         .text("Uhrzeit");
-    svg.selectAll(".x.axis text").style("fill", "slategrey");
-    svg.selectAll(".y.axis text").style("fill", "slategrey");
+    svg.selectAll(".x.axis text").style("fill", d3.rgb(95, 109, 123));
+    svg.selectAll(".y.axis text").style("fill", d3.rgb(95, 109, 123));
 
     const labelSpacing = 25; // Minimum spacing between labels
     let lastY = -Infinity;

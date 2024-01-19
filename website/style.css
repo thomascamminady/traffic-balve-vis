@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Roboto", sans-serif;
-    color: slategrey;
+    color: rgb(95, 109, 123);
 
 
 }
@@ -33,7 +33,7 @@ svg {
 }
 
 .grid line {
-    stroke: slategrey;
+    stroke: rgb(95, 109, 123);
     stroke-opacity: 0.15;
     shape-rendering: crispEdges;
 }
@@ -51,7 +51,7 @@ svg {
     padding: 0 20px;
     /* Add padding for left justification */
     font-size: 16px;
-    color: slategrey;
+    color: rgb(95, 109, 123);
 
 }
 
