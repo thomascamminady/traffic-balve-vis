@@ -205,6 +205,8 @@ function createChart(data, fromValue) {
         .style("font-size", "15px")
         .style("fill", "slategray")
         .text("Uhrzeit");
+    svg.selectAll(".x.axis text").style("fill", "slategray");
+    svg.selectAll(".y.axis text").style("fill", "slategray");
 
     const labelSpacing = 25; // Minimum spacing between labels
     let lastY = -Infinity;
