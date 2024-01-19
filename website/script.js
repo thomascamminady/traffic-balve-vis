@@ -64,7 +64,8 @@ function createChart(data, fromValue) {
         .ticks(d3.timeHour.every(1))
         .tickFormat(d3.timeFormat("%H:00"));
 
-    svg.append("g").attr("transform", `translate(0, ${height})`).call(xAxis);
+    svg.append("g").attr("transform", `translate(0, ${height})`).call(xAxis).selectAll("path, line")
+        .style("stroke", "slategrey");
 
     // Add Y axis with custom tick format
     // Define the maximum duration in seconds
@@ -79,7 +80,7 @@ function createChart(data, fromValue) {
     const minDurationInMinutes = Math.floor(minDurationInSeconds / 60);
 
     // Create a domain that covers 30-second increments
-    const yDomain = d3.range((minDurationInMinutes ) * 60, (maxDurationInMinutes + 0.1) * 60, 30);
+    const yDomain = d3.range((minDurationInMinutes) * 60, (maxDurationInMinutes + 0.1) * 60, 30);
 
     // Define the Y-axis scale with the custom domain
     const y = d3
@@ -98,7 +99,9 @@ function createChart(data, fromValue) {
                 const seconds = d % 60;
                 return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
             })
-    );
+
+    ).selectAll("path, line")
+        .style("stroke", "slategrey");
 
     svg
         .append("g")
@@ -129,7 +132,7 @@ function createChart(data, fromValue) {
             "Krumpaul -> Höhle",
             "Höhle -> Krumpaul",
         ])
-        .range([d3.color("purple"), "blue", "green", "blue", "green",d3.color("purple")]);
+        .range([d3.color("purple"), "blue", "green", "blue", "green", d3.color("purple")]);
 
 
     const colorfrom = d3
@@ -194,19 +197,19 @@ function createChart(data, fromValue) {
         .attr("x", 0 - height / 2)
         .attr("dy", "1em")
         .style("text-anchor", "middle")
-        .style("font-size", "15px")
-        .style("fill", "slategray")
+        .style("font-size", "12px")
+        .style("fill", "slategrey")
         .text("Reisezeit (min:sek)");
 
     svg
         .append("text")
         .attr("transform", `translate(${width - 12}, ${height + margin.bottom})`)
         .style("text-anchor", "middle")
-        .style("font-size", "15px")
-        .style("fill", "slategray")
+        .style("fill", "slategrey")
+        .style("font-size", "12px")
         .text("Uhrzeit");
-    svg.selectAll(".x.axis text").style("fill", "slategray");
-    svg.selectAll(".y.axis text").style("fill", "slategray");
+    svg.selectAll(".x.axis text").style("fill", "slategrey");
+    svg.selectAll(".y.axis text").style("fill", "slategrey");
 
     const labelSpacing = 25; // Minimum spacing between labels
     let lastY = -Infinity;

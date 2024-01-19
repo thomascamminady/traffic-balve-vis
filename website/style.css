@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Roboto", sans-serif;
-    color: darkslategray;
+    color: slategrey;
 
 
 }
@@ -25,12 +25,7 @@ svg {
 }
 
 .axis path,
-.axis line {
-    fill: none;
-    stroke: lightgray;
-    stroke-opacity: 0.7;
-    shape-rendering: crispEdges;
-}
+
 
 .line {
     fill: none;
@@ -38,8 +33,8 @@ svg {
 }
 
 .grid line {
-    stroke: lightgray;
-    stroke-opacity: 0.5;
+    stroke: slategrey;
+    stroke-opacity: 0.15;
     shape-rendering: crispEdges;
 }
 
@@ -56,7 +51,7 @@ svg {
     padding: 0 20px;
     /* Add padding for left justification */
     font-size: 16px;
-    color: darkslategray;
+    color: slategrey;
 
 }
 
