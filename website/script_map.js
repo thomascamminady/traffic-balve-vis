@@ -42,9 +42,9 @@ var purpleIcon = new L.Icon({
 
 
 // Add markers for the coordinates
-var hoehleMarker = L.marker([51.341209, 7.872643], { icon: greenIcon }).addTo(map);
+var hoehleMarker = L.marker([51.341209, 7.872643], { icon: blueIcon }).addTo(map);
 
-var krankenhausMarker = L.marker([51.326923, 7.867607], { icon: blueIcon }).addTo(map);
+var krankenhausMarker = L.marker([51.326923, 7.867607], { icon: greenIcon }).addTo(map);
 
 var schuleMarker = L.marker([51.327617, 7.852697], { icon: purpleIcon }).addTo(map);
 krankenhausMarker.bindPopup("Krankenhaus");
