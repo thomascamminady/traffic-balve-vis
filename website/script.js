@@ -62,7 +62,7 @@ function createChart(data, fromValue) {
     const xAxis = d3
         .axisBottom(x)
         .ticks(d3.timeHour.every(1))
-        .tickFormat(d3.timeFormat("%H"));
+        .tickFormat(d3.timeFormat("%H:00"));
 
     svg.append("g").attr("transform", `translate(0, ${height})`).call(xAxis);
 
