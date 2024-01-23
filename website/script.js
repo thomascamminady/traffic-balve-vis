@@ -48,7 +48,7 @@ function createObservablePlotChart(data, fromValue) {
             };
         });
     const chart = Plot.plot({
-        title: fromValue +" → ",
+        subtitle: fromValue +" → ",
         grid: true,
         x: {
             type: "utc",
