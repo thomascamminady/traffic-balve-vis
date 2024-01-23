@@ -33,6 +33,8 @@ function createObservablePlotChart(data, fromValue) {
         d3.group(filteredData, (d) => d.parsedDate).values()
     );
     const groupedByTo = Array.from(d3.group(filteredData, (d) => d.to).values());
+    // var min = Math.min(...data.map(item => item.durationInTrafficMinutes));
+    // var max = Math.max(...data.map(item => item.durationInTrafficMinutes));
 
     // Prepare data for labels for today's date
     const labelData = groupedByTo
@@ -46,7 +48,7 @@ function createObservablePlotChart(data, fromValue) {
             };
         });
     const chart = Plot.plot({
-        subtitle: fromValue +" → ",
+        title: fromValue +" → ",
         grid: true,
         x: {
             type: "utc",
@@ -55,6 +57,7 @@ function createObservablePlotChart(data, fromValue) {
         },
         y: {
             label: "Reisezeit (Minuten)",
+            domain:[2,5]
         },
         color: {
             type: "categorical",
@@ -70,6 +73,15 @@ function createObservablePlotChart(data, fromValue) {
                     opacity: (d) => (d.is_today ? 1 : 0.1),
                 })
             ),
+            ...groupedByDate.map((dayData) =>
+                Plot.dot(dayData, {
+                    x: "parsedTime",
+                    y: "durationInTrafficMinutes",
+                    fill:"to",
+                    r:2,
+                    opacity: (d) => (d.is_today ? 1 : 0),
+                })
+            ),
             Plot.text(labelData, {
                 x: "parsedTime",
                 y: "durationInTrafficMinutes",
@@ -78,6 +90,7 @@ function createObservablePlotChart(data, fromValue) {
                 fontSize: 16,
                 textAnchor: "start",
                 // fontWeight:"bold",
+                // dy: 
                 dx: 10, // Offset the label horizontally
 
             }),
