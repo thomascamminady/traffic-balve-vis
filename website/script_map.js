@@ -8,7 +8,7 @@ var map = L.map("map", {
   keyboard: false, // disables zooming using the + and - keys
   dragging: false, // disables moving the map by dragging
   tap: false // disables tap interaction on touch devices
-}).setView([51.3356, 7.8626], 13);
+}).setView([51.3356, 7.8640], 14);
 
 // Add OpenStreetMap as the base map layer
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
