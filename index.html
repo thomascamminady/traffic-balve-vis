@@ -39,9 +39,18 @@
   <script src="website/script_footer.js"></script>
   <!-- Include Leaflet library -->
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <!-- Create a div element for the map -->
   <div id="map"></div>
   <script src="website/script_map.js"></script>
+
+  <!-- Create a div element for the map -->
+  <button id="btnChart1" class="chart-button">Reisegeschwindigkeit</button>
+  <button id="btnChart2" class="chart-button">Reisedauer</button>
+
+  <div id="chart_kph" style="display: block;"></div>
+  <div id="chart_time" style="display: none;"></div>
+
+  <!-- <div id="charts_kph"></div> -->
+
 </body>
 
 </html>

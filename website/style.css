@@ -65,3 +65,22 @@ svg {
     vertical-align: middle;
     height: 20px;
 }
+
+.chart-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #808080;
+    /* Default gray color */
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.chart-button.active {
+    background-color: #007bff;
+    /* Blue color for the active button */
+}
