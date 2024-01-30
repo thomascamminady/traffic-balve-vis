@@ -4,7 +4,14 @@ const dataUrl =
 fetch(dataUrl)
     .then((response) => response.text())
     .then((data) => {
+        
         const parsedData = d3.csvParse(data, d3.autoType);
+        const newestTimestamp = d3.max(parsedData, (d) =>
+            new Date(d.datetime).getTime()
+        );
+
+        document.getElementById("update-time").textContent =
+            "Zuletzt aktualisiert: " + formatTimestamp(newestTimestamp);
 
         const today = d3.timeFormat("%Y-%m-%d")(new Date());
         parsedData.forEach((d) => {
@@ -205,20 +212,6 @@ function createObservablePlotChart2(data, fromValue) {
 
     //    document.body.appendChild(chart);
 }
-
-// JavaScript code to find the newest timestamp in the data
-fetch(dataUrl)
-    .then((response) => response.text())
-    .then((data) => {
-        const parsedData = d3.csvParse(data, d3.autoType);
-        const newestTimestamp = d3.max(parsedData, (d) =>
-            new Date(d.datetime).getTime()
-        );
-
-        document.getElementById("update-time").textContent =
-            "Zuletzt aktualisiert: " + formatTimestamp(newestTimestamp);
-    })
-    .catch((error) => console.error("Error fetching the data:", error));
 
 function formatTimestamp(timestamp) {
     const date = new Date(timestamp);
