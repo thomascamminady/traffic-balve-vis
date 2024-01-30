@@ -96,7 +96,7 @@ function createObservablePlotChart1(data, fromValue) {
         marks: [
             ...groupedByDate.map((dayData) =>
                 Plot.line(dayData, {
-                    curve: "natural",
+                    curve: "monotone-x",
                     x: "parsedTime",
                     y: "kph",
                     stroke: "to",
@@ -176,7 +176,7 @@ function createObservablePlotChart2(data, fromValue) {
         marks: [
             ...groupedByDate.map((dayData) =>
                 Plot.line(dayData, {
-                    curve: "natural",
+                    curve: "monotone-x",
                     x: "parsedTime",
                     y: "durationInTrafficMinutes",
                     stroke: "to",
