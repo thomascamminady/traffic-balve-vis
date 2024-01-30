@@ -41,7 +41,7 @@ fetch(dataUrl)
             document.getElementById('btnChart2').classList.add('active');
         });
 
-        document.getElementById('btnChart1').classList.add('active');
+        document.getElementById('btnChart2').classList.add('active');
 
     })
     .catch((error) => console.error("Error fetching the data:", error));
