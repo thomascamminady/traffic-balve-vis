@@ -205,7 +205,7 @@ function createObservablePlotChart2(data, fromValue) {
             }),
         ],
         width: 1360,
-        height: 325,
+        height: 425,
     });
     const div = document.querySelector("#chart_time");
     div.append(chart);

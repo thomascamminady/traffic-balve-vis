@@ -12,7 +12,7 @@ body {
 
 #map {
     height: 400px;
-    width: 660px;
+    width: 800px;
     margin: 20px auto;
     /* Center horizontally */
 
@@ -46,7 +46,7 @@ svg {
     text-align: left;
     margin: 20px auto;
     /* Center horizontally */
-    width: 660px;
+    width: 800px;
     /* Set the width */
     padding: 0 20px;
     /* Add padding for left justification */
@@ -74,10 +74,10 @@ svg {
     /* Default gray color */
     border: none;
     border-radius: 5px;
-    margin: 5px;
+    margin: 15px;
     cursor: pointer;
     outline: none;
-    transition: background-color 0.3s;
+    transition: background-color 0.1s;
 }
 
 .chart-button.active {
