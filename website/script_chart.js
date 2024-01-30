@@ -93,7 +93,7 @@ function createObservablePlotChart1(data, fromValue) {
         color: {
             type: "categorical",
             domain: ["Krumpaul", "Krankenhaus", "Höhle"],
-            range: ["purple", "green", "#007bff"],
+            range: ["darkorange",  "#007bff","green",],
         },
         marks: [
             
@@ -103,7 +103,7 @@ function createObservablePlotChart1(data, fromValue) {
                     x: "parsedTime",
                     y: "kph",
                     stroke: "to",
-                    opacity: (d) => (d.is_today ? 1 : 0.1),
+                    opacity: (d) => (d.is_today ? 1 : 0.12),
                 })
             ),
 
@@ -120,9 +120,9 @@ function createObservablePlotChart1(data, fromValue) {
                 y: "kph",
                 fill: "to",
                 text: "ziel",
-                fontSize: 16,
+                fontSize: 18,
                 textAnchor: "start",
-                // fontWeight:"bold",
+                fontWeight:"bold",
                 // dy:
                 dx: 10, // Offset the label horizontally
             }),
@@ -175,7 +175,7 @@ function createObservablePlotChart2(data, fromValue) {
         color: {
             type: "categorical",
             domain: ["Krumpaul", "Krankenhaus", "Höhle"],
-            range: ["purple", "green", "#007bff"],
+            range: ["darkorange",  "#007bff","green",],
         },
         marks: [
             ...groupedByDate.map((dayData) =>
@@ -184,7 +184,7 @@ function createObservablePlotChart2(data, fromValue) {
                     x: "parsedTime",
                     y: "durationInTrafficMinutes",
                     stroke: "to",
-                    opacity: (d) => (d.is_today ? 1 : 0.1),
+                    opacity: (d) => (d.is_today ? 1 : 0.12),
                 })
             ),
 
@@ -201,9 +201,9 @@ function createObservablePlotChart2(data, fromValue) {
                 y: "durationInTrafficMinutes",
                 fill: "to",
                 text: "ziel",
-                fontSize: 16,
+                fontSize: 18,
                 textAnchor: "start",
-                // fontWeight:"bold",
+                fontWeight:"bold",
                 // dy:
                 dx: 10, // Offset the label horizontally
             }),

@@ -5,17 +5,17 @@
     <title>Verkehrsmonitor Balve</title>
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
-    <!-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Roboto"
     />
     <link rel="stylesheet" href="website/style.css" />
-    <!-- <link
+    <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    /> -->
+    />
   </head>
 
   <body>
@@ -45,16 +45,16 @@
       </p>
       <p><span id="update-time"></span>.</p>
     </div>
-    <div>
+    <!-- <div>
       <img
         src="assets/map.png"
         alt="Karte von Balve"
         width="800"
         height="400"
       />
-    </div>
-    <!-- <div id="map"></div>
-    <script src="website/script_map.js"></script> -->
+    </div> -->
+    <div id="map"></div>
+    <script src="website/script_map.js"></script>
     <button id="btnChart1" class="chart-button">Reisedauer</button>
     <button id="btnChart2" class="chart-button">Reisegeschwindigkeit</button>
     <div id="chart_time" style="display: block"></div>
