@@ -46,7 +46,7 @@ svg {
     text-align: left;
     margin: 20px auto;
     /* Center horizontally */
-    width: 960px;
+    width: 660px;
     /* Set the width */
     padding: 0 20px;
     /* Add padding for left justification */
@@ -56,7 +56,7 @@ svg {
 }
 
 .footer a {
-    color: #2626b1;
+    color: #007bff;
     /* Blue color for links */
     text-decoration: none;
 }
@@ -68,9 +68,9 @@ svg {
 
 .chart-button {
     padding: 10px 20px;
-    font-size: 16px;
+    /* font-size: 16px; */
     color: #fff;
-    background-color: #808080;
+    background-color: rgb(95, 109, 123);
     /* Default gray color */
     border: none;
     border-radius: 5px;

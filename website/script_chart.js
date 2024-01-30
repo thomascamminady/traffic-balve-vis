@@ -86,12 +86,12 @@ function createObservablePlotChart1(data, fromValue) {
         },
         y: {
             label: "Reisegeschwindigkeit (km/h)",
-            domain: [10, 50],
+            domain: [15, 50],
         },
         color: {
             type: "categorical",
             domain: ["Krumpaul", "Krankenhaus", "Höhle"],
-            range: ["purple", "green", "blue"],
+            range: ["purple", "green", "#007bff"],
         },
         marks: [
             ...groupedByDate.map((dayData) =>
@@ -124,7 +124,7 @@ function createObservablePlotChart1(data, fromValue) {
                 dx: 10, // Offset the label horizontally
             }),
         ],
-        width: 960,
+        width: 1360,
         height: 425,
     });
     const div = document.querySelector("#chart_kph");
@@ -171,7 +171,7 @@ function createObservablePlotChart2(data, fromValue) {
         color: {
             type: "categorical",
             domain: ["Krumpaul", "Krankenhaus", "Höhle"],
-            range: ["purple", "green", "blue"],
+            range: ["purple", "green", "#007bff"],
         },
         marks: [
             ...groupedByDate.map((dayData) =>
@@ -204,8 +204,8 @@ function createObservablePlotChart2(data, fromValue) {
                 dx: 10, // Offset the label horizontally
             }),
         ],
-        width: 960,
-        height: 425,
+        width: 1360,
+        height: 325,
     });
     const div = document.querySelector("#chart_time");
     div.append(chart);
