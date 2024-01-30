@@ -28,15 +28,15 @@ fetch(dataUrl)
 
 
         document.getElementById('btnChart1').addEventListener('click', function () {
-            document.getElementById('chart_kph').style.display = 'block';
-            document.getElementById('chart_time').style.display = 'none';
+            document.getElementById('chart_time').style.display = 'block';
+            document.getElementById('chart_kph').style.display = 'none';
             document.getElementById('btnChart1').classList.add('active');
             document.getElementById('btnChart2').classList.remove('active');
         });
 
         document.getElementById('btnChart2').addEventListener('click', function () {
-            document.getElementById('chart_kph').style.display = 'none';
-            document.getElementById('chart_time').style.display = 'block';
+            document.getElementById('chart_time').style.display = 'none';
+            document.getElementById('chart_kph').style.display = 'block';
             document.getElementById('btnChart1').classList.remove('active');
             document.getElementById('btnChart2').classList.add('active');
         });
