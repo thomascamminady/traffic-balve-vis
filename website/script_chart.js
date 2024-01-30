@@ -22,6 +22,7 @@ fetch(dataUrl)
             d.durationInTrafficMinutes = d.duration_in_traffic_s / 60; // Convert seconds to minutes
             d.is_today = d.parsedDate === today; // Add is_today attribute
             d.kph = d.distance_m / 1000 / (d.duration_in_traffic_s / 3600);
+            d.ziel = "Ziel: "+d.to;
         });
 
         const fromValues = Array.from(new Set(parsedData.map((d) => d.from)));
@@ -74,10 +75,11 @@ function createObservablePlotChart1(data, fromValue) {
                 parsedTime: lastPoint.parsedTime,
                 kph: lastPoint.kph,
                 to: lastPoint.to,
+                ziel:lastPoint.ziel
             };
         });
     const chart = Plot.plot({
-        subtitle: fromValue + " → ",
+        subtitle: "Start: "+fromValue ,
         grid: true,
         x: {
             type: "utc",
@@ -94,6 +96,7 @@ function createObservablePlotChart1(data, fromValue) {
             range: ["purple", "green", "#007bff"],
         },
         marks: [
+            
             ...groupedByDate.map((dayData) =>
                 Plot.line(dayData, {
                     curve: "monotone-x",
@@ -116,7 +119,7 @@ function createObservablePlotChart1(data, fromValue) {
                 x: "parsedTime",
                 y: "kph",
                 fill: "to",
-                text: "to",
+                text: "ziel",
                 fontSize: 16,
                 textAnchor: "start",
                 // fontWeight:"bold",
@@ -154,10 +157,11 @@ function createObservablePlotChart2(data, fromValue) {
                 parsedTime: lastPoint.parsedTime,
                 durationInTrafficMinutes: lastPoint.durationInTrafficMinutes,
                 to: lastPoint.to,
+                ziel:lastPoint.ziel
             };
         });
     const chart = Plot.plot({
-        subtitle: fromValue + " → ",
+        subtitle: "Start: " + fromValue ,
         grid: true,
         x: {
             type: "utc",
@@ -196,7 +200,7 @@ function createObservablePlotChart2(data, fromValue) {
                 x: "parsedTime",
                 y: "durationInTrafficMinutes",
                 fill: "to",
-                text: "to",
+                text: "ziel",
                 fontSize: 16,
                 textAnchor: "start",
                 // fontWeight:"bold",
