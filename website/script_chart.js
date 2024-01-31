@@ -4,7 +4,14 @@ const dataUrl =
 fetch(dataUrl)
     .then((response) => response.text())
     .then((data) => {
+
         const parsedData = d3.csvParse(data, d3.autoType);
+        const newestTimestamp = d3.max(parsedData, (d) =>
+            new Date(d.datetime).getTime()
+        );
+
+        document.getElementById("update-time").textContent =
+            "Zuletzt aktualisiert: " + formatTimestamp(newestTimestamp);
 
         const today = d3.timeFormat("%Y-%m-%d")(new Date());
         parsedData.forEach((d) => {
@@ -15,6 +22,7 @@ fetch(dataUrl)
             d.durationInTrafficMinutes = d.duration_in_traffic_s / 60; // Convert seconds to minutes
             d.is_today = d.parsedDate === today; // Add is_today attribute
             d.kph = d.distance_m / 1000 / (d.duration_in_traffic_s / 3600);
+            d.ziel = "Ziel: " + d.to;
         });
 
         const fromValues = Array.from(new Set(parsedData.map((d) => d.from)));
@@ -25,18 +33,20 @@ fetch(dataUrl)
             createObservablePlotChart2(parsedData, fromValue);
         });
 
-        document.getElementById("btnChart1").addEventListener("click", function () {
-            document.getElementById("chart_kph").style.display = "block";
-            document.getElementById("chart_time").style.display = "none";
-            document.getElementById("btnChart1").classList.add("active");
-            document.getElementById("btnChart2").classList.remove("active");
+
+
+        document.getElementById('btnChart1').addEventListener('click', function () {
+            document.getElementById('chart_time').style.display = 'block';
+            document.getElementById('chart_kph').style.display = 'none';
+            document.getElementById('btnChart1').classList.add('active');
+            document.getElementById('btnChart2').classList.remove('active');
         });
 
-        document.getElementById("btnChart2").addEventListener("click", function () {
-            document.getElementById("chart_kph").style.display = "none";
-            document.getElementById("chart_time").style.display = "block";
-            document.getElementById("btnChart1").classList.remove("active");
-            document.getElementById("btnChart2").classList.add("active");
+        document.getElementById('btnChart2').addEventListener('click', function () {
+            document.getElementById('chart_time').style.display = 'none';
+            document.getElementById('chart_kph').style.display = 'block';
+            document.getElementById('btnChart1').classList.remove('active');
+            document.getElementById('btnChart2').classList.add('active');
         });
 
         document.getElementById("btnChart1").classList.add("active");
@@ -64,10 +74,11 @@ function createObservablePlotChart1(data, fromValue) {
                 parsedTime: lastPoint.parsedTime,
                 kph: lastPoint.kph,
                 to: lastPoint.to,
+                ziel: lastPoint.ziel
             };
         });
     const chart = Plot.plot({
-        subtitle: fromValue + " → ",
+        subtitle: "Start: " + fromValue,
         grid: true,
         x: {
             type: "utc",
@@ -76,20 +87,22 @@ function createObservablePlotChart1(data, fromValue) {
         },
         y: {
             label: "Reisegeschwindigkeit (km/h)",
-            domain: [10, 50],
+            domain: [15, 50],
         },
         color: {
             type: "categorical",
             domain: ["Krumpaul", "Krankenhaus", "Höhle"],
-            range: ["purple", "green", "blue"],
+            range: ["darkorange", "#007bff", "green",],
         },
         marks: [
+
             ...groupedByDate.map((dayData) =>
                 Plot.line(dayData, {
+                    curve: "monotone-x",
                     x: "parsedTime",
                     y: "kph",
                     stroke: "to",
-                    opacity: (d) => (d.is_today ? 1 : 0.1),
+                    opacity: (d) => (d.is_today ? 1 : 0.12),
                 })
             ),
 
@@ -105,15 +118,15 @@ function createObservablePlotChart1(data, fromValue) {
                 x: "parsedTime",
                 y: "kph",
                 fill: "to",
-                text: "to",
-                fontSize: 16,
+                text: "ziel",
+                fontSize: 18,
                 textAnchor: "start",
-                // fontWeight:"bold",
+                fontWeight: "bold",
                 // dy:
                 dx: 10, // Offset the label horizontally
             }),
         ],
-        width: 960,
+        width: 1360,
         height: 425,
     });
     const div = document.querySelector("#chart_kph");
@@ -143,10 +156,11 @@ function createObservablePlotChart2(data, fromValue) {
                 parsedTime: lastPoint.parsedTime,
                 durationInTrafficMinutes: lastPoint.durationInTrafficMinutes,
                 to: lastPoint.to,
+                ziel: lastPoint.ziel
             };
         });
     const chart = Plot.plot({
-        subtitle: fromValue + " → ",
+        subtitle: "Start: " + fromValue,
         grid: true,
         x: {
             type: "utc",
@@ -160,15 +174,16 @@ function createObservablePlotChart2(data, fromValue) {
         color: {
             type: "categorical",
             domain: ["Krumpaul", "Krankenhaus", "Höhle"],
-            range: ["purple", "green", "blue"],
+            range: ["darkorange", "#007bff", "green",],
         },
         marks: [
             ...groupedByDate.map((dayData) =>
                 Plot.line(dayData, {
+                    curve: "monotone-x",
                     x: "parsedTime",
                     y: "durationInTrafficMinutes",
                     stroke: "to",
-                    opacity: (d) => (d.is_today ? 1 : 0.1),
+                    opacity: (d) => (d.is_today ? 1 : 0.12),
                 })
             ),
 
@@ -184,15 +199,15 @@ function createObservablePlotChart2(data, fromValue) {
                 x: "parsedTime",
                 y: "durationInTrafficMinutes",
                 fill: "to",
-                text: "to",
-                fontSize: 16,
+                text: "ziel",
+                fontSize: 18,
                 textAnchor: "start",
-                // fontWeight:"bold",
+                fontWeight: "bold",
                 // dy:
                 dx: 10, // Offset the label horizontally
             }),
         ],
-        width: 960,
+        width: 1360,
         height: 425,
     });
     const div = document.querySelector("#chart_time");
@@ -200,20 +215,6 @@ function createObservablePlotChart2(data, fromValue) {
 
     //    document.body.appendChild(chart);
 }
-
-// JavaScript code to find the newest timestamp in the data
-fetch(dataUrl)
-    .then((response) => response.text())
-    .then((data) => {
-        const parsedData = d3.csvParse(data, d3.autoType);
-        const newestTimestamp = d3.max(parsedData, (d) =>
-            new Date(d.datetime).getTime()
-        );
-
-        document.getElementById("update-time").textContent =
-            "Zuletzt aktualisiert: " + formatTimestamp(newestTimestamp);
-    })
-    .catch((error) => console.error("Error fetching the data:", error));
 
 function formatTimestamp(timestamp) {
     const date = new Date(timestamp);
