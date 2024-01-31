@@ -131,7 +131,7 @@ function createObservablePlotChart(
                 y: field,
                 fill: "to",
                 r: 2,
-                tip: true
+                tip: true,
             }),
 
             Plot.text(
@@ -144,7 +144,7 @@ function createObservablePlotChart(
                     fontSize: 18,
                     textAnchor: "start",
                     fontWeight: "bold",
-                    dy: -15,
+                    dy: 0, //-15,
                     dx: 10, // Offset the label horizontally
                 }
             ),
