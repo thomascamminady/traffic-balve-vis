@@ -71,7 +71,9 @@ function createObservablePlotChart1(data, fromValue) {
         .map((group) => {
             const lastPoint = group[0];
             return {
-                parsedTime: lastPoint.parsedTime,
+                parsedTime: Math.min(lastPoint.parsedTime, d3.timeParse("%H:%M:%S")(
+                    "20:00:00"
+                )),
                 kph: lastPoint.kph,
                 to: lastPoint.to,
                 ziel: lastPoint.ziel
@@ -153,7 +155,9 @@ function createObservablePlotChart2(data, fromValue) {
         .map((group) => {
             const lastPoint = group[0];
             return {
-                parsedTime: lastPoint.parsedTime,
+                parsedTime: Math.min(lastPoint.parsedTime, d3.timeParse("%H:%M:%S")(
+                    "20:00:00"
+                )),
                 durationInTrafficMinutes: lastPoint.durationInTrafficMinutes,
                 to: lastPoint.to,
                 ziel: lastPoint.ziel
