@@ -54,7 +54,9 @@ fetch(dataUrl)
     .catch((error) => console.error("Error fetching the data:", error));
 
 function createObservablePlotChart1(data, fromValue) {
-    const filteredData = data.filter((d) => d.from === fromValue);
+    const filteredData = data.filter((d) => d.from === fromValue && d.parsedTime < d3.timeParse("%H:%M:%S")(
+        "22:00:00"
+    ));
     const filteredDataToday = filteredData.filter((d) => d.is_today);
 
     // Group data by date
@@ -89,7 +91,7 @@ function createObservablePlotChart1(data, fromValue) {
         },
         y: {
             label: "Reisegeschwindigkeit (km/h)",
-            domain: [15, 50],
+            domain: [10, 50],
         },
         color: {
             type: "categorical",
@@ -138,7 +140,9 @@ function createObservablePlotChart1(data, fromValue) {
 }
 
 function createObservablePlotChart2(data, fromValue) {
-    const filteredData = data.filter((d) => d.from === fromValue);
+    const filteredData = data.filter((d) => d.from === fromValue && d.parsedTime < d3.timeParse("%H:%M:%S")(
+        "22:00:00"
+    ));
     const filteredDataToday = filteredData.filter((d) => d.is_today);
 
     // Group data by date
@@ -173,7 +177,7 @@ function createObservablePlotChart2(data, fromValue) {
         },
         y: {
             label: "Reisedauer (min)",
-            domain: [2, 6],
+            // domain: [2, 8],
         },
         color: {
             type: "categorical",
