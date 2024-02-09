@@ -25,17 +25,7 @@ fetch(dataUrl)
         });
         const criterias = Array.from(new Set(parsedData.map((d) => d.route)));
         criterias.forEach((criteria) => {
-            createObservablePlotChart(
-                parsedData,
-                criteria,
-                "kph",
-                "#chart_kph",
-                "Reisegeschwindigkeit (km/h)",
-                [10, 50]
-            );
-        });
-        criterias.forEach((criteria) => {
-            createObservablePlotChart(
+             createObservablePlotChart(
                 parsedData,
                 criteria,
                 "durationInTrafficMinutes",
@@ -43,6 +33,17 @@ fetch(dataUrl)
                 "Reisezeit (min)",
                 [2, 8]
             );
+        });
+        criterias.forEach((criteria) => {
+             createObservablePlotChart(
+                parsedData,
+                criteria,
+                "kph",
+                "#chart_kph",
+                "Reisegeschwindigkeit (km/h)",
+                [10, 50]
+            );
+           
         });
 
         document.getElementById("btnChart1").addEventListener("click", function () {
