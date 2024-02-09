@@ -123,7 +123,7 @@ function createObservablePlotChart(
                     x: "parsedTime",
                     y: field,
                     stroke: "to",
-                    opacity: (d) => (d.is_today ? 1 : 0.12),
+                    opacity: (d) => (d.is_today ? 1 : 0.08),
                 })
             ),
 
