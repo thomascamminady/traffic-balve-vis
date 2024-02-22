@@ -23,7 +23,7 @@ fetch(dataUrl)
             d.kph = d.distance_m / 1000 / (d.duration_in_traffic_s / 3600);
             d.ziel = "Ziel: " + d.to;
         });
-        const criterias = Array.from(new Set(parsedData.map((d) => d.route)));
+        const criterias = Array.from(new Set(parsedData.map((d) => d.route))).slice(0, 3);
         criterias.forEach((criteria) => {
              createObservablePlotChart(
                 parsedData,
