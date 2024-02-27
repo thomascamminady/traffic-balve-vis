@@ -1,10 +1,23 @@
-const dataUrl =
-    "https://raw.githubusercontent.com/thomascamminady/traffic-balve/main/data/summary.csv";
+
+// Change the URL to the location of your ZIP file
+const dataUrl = "https://raw.githubusercontent.com/thomascamminady/traffic-balve/feature/compressed_data/data/summary.csv.zip";
 
 fetch(dataUrl)
-    .then((response) => response.text())
-    .then((data) => {
-        const parsedData = d3.csvParse(data, d3.autoType);
+    .then((response) => {
+        if (!response.ok) throw new Error('Network response was not ok.');
+        return response.blob();
+    })
+    .then(JSZip.loadAsync) // Use JSZip to read the ZIP file
+    .then((zip) => {
+        // Assuming there's only one file in the ZIP and you know its name,
+        // or you can adjust logic to find the right file
+        const csvFileName = Object.keys(zip.files)[0];
+        return zip.file(csvFileName).async("text"); // Get the file content as text
+    })
+    .then((csvText) => {
+        // The rest of your processing logic here...
+        const parsedData = d3.csvParse(csvText, d3.autoType);
+        // Process parsedData as before
         const newestTimestamp = d3.max(parsedData, (d) =>
             new Date(d.datetime).getTime()
         );
@@ -25,7 +38,7 @@ fetch(dataUrl)
         });
         const criterias = Array.from(new Set(parsedData.map((d) => d.route))).slice(0, 3);
         criterias.forEach((criteria) => {
-             createObservablePlotChart(
+            createObservablePlotChart(
                 parsedData,
                 criteria,
                 "durationInTrafficMinutes",
@@ -35,7 +48,7 @@ fetch(dataUrl)
             );
         });
         criterias.forEach((criteria) => {
-             createObservablePlotChart(
+            createObservablePlotChart(
                 parsedData,
                 criteria,
                 "kph",
@@ -43,7 +56,7 @@ fetch(dataUrl)
                 "Reisegeschwindigkeit (km/h)",
                 [10, 50]
             );
-           
+
         });
 
         document.getElementById("btnChart1").addEventListener("click", function () {
