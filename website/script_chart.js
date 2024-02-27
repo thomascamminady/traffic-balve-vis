@@ -1,6 +1,6 @@
 
 // Change the URL to the location of your ZIP file
-const dataUrl = "https://raw.githubusercontent.com/thomascamminady/traffic-balve/feature/compressed_data/data/summary.csv.zip";
+const dataUrl = "https://raw.githubusercontent.com/thomascamminady/traffic-balve/main/data/summary.csv.zip";
 
 fetch(dataUrl)
     .then((response) => {
@@ -17,6 +17,7 @@ fetch(dataUrl)
     .then((csvText) => {
         // The rest of your processing logic here...
         const parsedData = d3.csvParse(csvText, d3.autoType);
+        console.log(parsedData)
         // Process parsedData as before
         const newestTimestamp = d3.max(parsedData, (d) =>
             new Date(d.datetime).getTime()
@@ -28,7 +29,7 @@ fetch(dataUrl)
         const today = d3.timeFormat("%Y-%m-%d")(new Date());
         parsedData.forEach((d) => {
             d.parsedTime = d3.timeParse("%H:%M:%S")(
-                d.datetime.split("T")[1].split(".")[0]
+                d.datetime.split(" ")[1].split(".")[0]
             );
             d.parsedDate = d3.timeFormat("%Y-%m-%d")(new Date(d.datetime));
             d.durationInTrafficMinutes = d.duration_in_traffic_s / 60; // Convert seconds to minutes
