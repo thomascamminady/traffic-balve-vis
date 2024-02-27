@@ -17,7 +17,6 @@ fetch(dataUrl)
     .then((csvText) => {
         // The rest of your processing logic here...
         const parsedData = d3.csvParse(csvText, d3.autoType);
-        console.log(parsedData)
         // Process parsedData as before
         const newestTimestamp = d3.max(parsedData, (d) =>
             new Date(d.datetime).getTime()
