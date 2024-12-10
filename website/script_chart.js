@@ -1,18 +1,10 @@
-
-// Change the URL to the location of your ZIP file
-const dataUrl = "https://raw.githubusercontent.com/thomascamminady/traffic-balve/main/data/summary.csv.zip";
+// Change the URL to the location of your CSV file
+const dataUrl = "https://raw.githubusercontent.com/thomascamminady/traffic-balve/refs/heads/main/data/summary.csv";
 
 fetch(dataUrl)
     .then((response) => {
         if (!response.ok) throw new Error('Network response was not ok.');
-        return response.blob();
-    })
-    .then(JSZip.loadAsync) // Use JSZip to read the ZIP file
-    .then((zip) => {
-        // Assuming there's only one file in the ZIP and you know its name,
-        // or you can adjust logic to find the right file
-        const csvFileName = Object.keys(zip.files)[0];
-        return zip.file(csvFileName).async("text"); // Get the file content as text
+        return response.text();
     })
     .then((csvText) => {
         // The rest of your processing logic here...
@@ -27,8 +19,9 @@ fetch(dataUrl)
 
         const today = d3.timeFormat("%Y-%m-%d")(new Date());
         parsedData.forEach((d) => {
+
             d.parsedTime = d3.timeParse("%H:%M:%S")(
-                d.datetime.split(" ")[1].split(".")[0]
+                d.datetime.split("T")[1].split(".")[0]
             );
             d.parsedDate = d3.timeFormat("%Y-%m-%d")(new Date(d.datetime));
             d.durationInTrafficMinutes = d.duration_in_traffic_s / 60; // Convert seconds to minutes
@@ -56,27 +49,11 @@ fetch(dataUrl)
                 "Reisegeschwindigkeit (km/h)",
                 [10, 50]
             );
-
         });
-
-        document.getElementById("btnChart1").addEventListener("click", function () {
-            document.getElementById("chart_kph").style.display = "block";
-            document.getElementById("chart_time").style.display = "none";
-            document.getElementById("btnChart1").classList.add("active");
-            document.getElementById("btnChart2").classList.remove("active");
-        });
-
-        document.getElementById("btnChart2").addEventListener("click", function () {
-            document.getElementById("chart_kph").style.display = "none";
-            document.getElementById("chart_time").style.display = "block";
-            document.getElementById("btnChart1").classList.remove("active");
-            document.getElementById("btnChart2").classList.add("active");
-        });
-
-        document.getElementById("btnChart1").classList.add("active");
     })
-    .catch((error) => console.error("Error fetching the data:", error));
-
+    .catch((error) => {
+        console.error('Error fetching or processing data:', error);
+    });
 function createObservablePlotChart(
     data,
     criteria,
